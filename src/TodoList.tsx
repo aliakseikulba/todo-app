@@ -1,6 +1,7 @@
 import React from 'react';
 import {FilterValuesType, TaskType} from './App';
 
+
 type TodoListPropsType = {
   title: string
   tasks: Array<TaskType>
@@ -10,6 +11,7 @@ type TodoListPropsType = {
 
 const TodoList = (props: TodoListPropsType) => {
 
+  //dynamic tasks rendering with .map()
   const tasksJSXElements = props.tasks.map(task => {
     return (
       <li key={task.id}>
