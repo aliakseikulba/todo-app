@@ -1,17 +1,19 @@
-import React from 'react';
+import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {FilterValuesType, TaskType} from './App';
 
 
 type TodoListPropsType = {
   title: string
   tasks: Array<TaskType>
-  removeTask: (taskId: number) => void
+  removeTask: (taskId: string) => void
   changeFilter: (filter: FilterValuesType) => void
+  addTask: (title: string) => void
 }
 
 const TodoList = (props: TodoListPropsType) => {
 
-  //dynamic tasks rendering with .map()
+  const [title, setTitle] = useState<string>('');
+
   const tasksJSXElements = props.tasks.map(task => {
     return (
       <li key={task.id}>
@@ -21,21 +23,43 @@ const TodoList = (props: TodoListPropsType) => {
       </li>
     );
   });
+  const addTask = () => {
+    if (title) {
+      props.addTask(title);
+      setTitle('');
+    }
+  };
+  const onChangeHandle = (e: ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.currentTarget.value);
+  };
+  const onKeyPressHandle = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      addTask();
+    }
+  };
+
+  const setAll = () => props.changeFilter('all');
+  const setActive = () => props.changeFilter('active');
+  const setCompleted = () => props.changeFilter('completed');
 
   return (
     <div className="todolist">
       <h3>{props.title}</h3>
       <div>
-        <input/>
-        <button>+</button>
+        <input
+          placeholder="Add task..."
+          value={title}
+          onChange={onChangeHandle}
+          onKeyPress={onKeyPressHandle}/>
+        <button onClick={addTask}>+</button>
       </div>
       <ul>
         {tasksJSXElements}
       </ul>
       <div>
-        <button onClick={() => props.changeFilter('all')}>All</button>
-        <button onClick={() => props.changeFilter('active')}>Active</button>
-        <button onClick={() => props.changeFilter('completed')}>Completed</button>
+        <button onClick={setAll}>All</button>
+        <button onClick={setActive}>Active</button>
+        <button onClick={setCompleted}>Completed</button>
       </div>
     </div>
   );
