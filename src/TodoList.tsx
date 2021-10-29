@@ -13,7 +13,6 @@ type TodoListPropsType = {
 const TodoList = (props: TodoListPropsType) => {
 
   const [title, setTitle] = useState<string>('');
-
   const tasksJSXElements = props.tasks.map(task => {
     const onRemoveHandle = () => props.removeTask(task.id);
 
@@ -39,7 +38,6 @@ const TodoList = (props: TodoListPropsType) => {
       addTask();
     }
   };
-
   const setAll = () => props.changeFilter('all');
   const setActive = () => props.changeFilter('active');
   const setCompleted = () => props.changeFilter('completed');
