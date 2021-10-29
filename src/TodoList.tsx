@@ -15,11 +15,16 @@ const TodoList = (props: TodoListPropsType) => {
   const [title, setTitle] = useState<string>('');
 
   const tasksJSXElements = props.tasks.map(task => {
+
+    const onRemoveHandle = (id: string) => {
+      props.removeTask(id);
+    }
+
     return (
       <li key={task.id}>
         <input type="checkbox" checked={task.isDone}/>
         <span>{task.title}</span>
-        <button onClick={() => props.removeTask(task.id)}>X</button>
+        <button onClick={() => onRemoveHandle(task.id)}>X</button>
       </li>
     );
   });
