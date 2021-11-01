@@ -14,13 +14,13 @@ const TodoList = (props: TodoListPropsType) => {
 
   const [title, setTitle] = useState<string>('');
   const tasksJSXElements = props.tasks.map(t => {
-    const onRemoveHandle = () => props.removeTask(t.id);
+    const onRemoveHandler = () => props.removeTask(t.id);
 
     return (
       <li key={t.id}>
         <input type="checkbox" checked={t.isDone}/>
         <span>{t.title}</span>
-        <button onClick={onRemoveHandle}>X</button>
+        <button onClick={onRemoveHandler}>X</button>
       </li>
     );
   });
@@ -30,10 +30,10 @@ const TodoList = (props: TodoListPropsType) => {
       setTitle('');
     }
   };
-  const onChangeHandle = (e: ChangeEvent<HTMLInputElement>) => {
+  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.currentTarget.value);
   };
-  const onKeyPressHandle = (e: KeyboardEvent<HTMLInputElement>) => {
+  const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       addTask();
     }
@@ -49,8 +49,8 @@ const TodoList = (props: TodoListPropsType) => {
         <input
           placeholder="Add task..."
           value={title}
-          onChange={onChangeHandle}
-          onKeyPress={onKeyPressHandle}/>
+          onChange={onChangeHandler}
+          onKeyPress={onKeyPressHandler}/>
         <button onClick={addTask}>+</button>
       </div>
       <ul>
