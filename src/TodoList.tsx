@@ -62,6 +62,9 @@ const TodoList = (props: TodoListPropsType) => {
   const allButtonClass = props.filter === 'all' ? 'active-filter' : '';
   const activeButtonClass = props.filter === 'active' ? 'active-filter' : '';
   const completedButtonClass = props.filter === 'completed' ? 'active-filter' : '';
+  const errorMessage = error
+    ? <div style={{color: 'red'}}>Title is required</div>
+    : null;
 
   return (
     <div className="todolist">
@@ -74,6 +77,7 @@ const TodoList = (props: TodoListPropsType) => {
           onChange={onChangeHandler}
           onKeyPress={onKeyPressHandler}/>
         <button onClick={addTask}>+</button>
+        {errorMessage}
       </div>
       <ul>
         {tasksJSXElements}
