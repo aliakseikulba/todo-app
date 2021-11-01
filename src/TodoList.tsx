@@ -13,13 +13,13 @@ type TodoListPropsType = {
 const TodoList = (props: TodoListPropsType) => {
 
   const [title, setTitle] = useState<string>('');
-  const tasksJSXElements = props.tasks.map(task => {
-    const onRemoveHandle = () => props.removeTask(task.id);
+  const tasksJSXElements = props.tasks.map(t => {
+    const onRemoveHandle = () => props.removeTask(t.id);
 
     return (
-      <li key={task.id}>
-        <input type="checkbox" checked={task.isDone}/>
-        <span>{task.title}</span>
+      <li key={t.id}>
+        <input type="checkbox" checked={t.isDone}/>
+        <span>{t.title}</span>
         <button onClick={onRemoveHandle}>X</button>
       </li>
     );
