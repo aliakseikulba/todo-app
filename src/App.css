@@ -13,3 +13,6 @@
   padding: 20px;
 }
 
+.active-filter {
+  background-color: deepskyblue;
+}

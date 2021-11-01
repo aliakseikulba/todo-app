@@ -3,6 +3,7 @@ import {FilterValuesType, TaskType} from './App';
 
 
 type TodoListPropsType = {
+  filter: FilterValuesType
   title: string
   tasks: Array<TaskType>
   removeTask: (taskId: string) => void
@@ -13,6 +14,7 @@ type TodoListPropsType = {
 const TodoList = (props: TodoListPropsType) => {
 
   const [title, setTitle] = useState<string>('');
+
   const tasksJSXElements = props.tasks.map(t => {
     const onRemoveHandler = () => props.removeTask(t.id);
 
@@ -24,6 +26,7 @@ const TodoList = (props: TodoListPropsType) => {
       </li>
     );
   });
+
   const addTask = () => {
     if (title) {
       props.addTask(title);
@@ -42,6 +45,10 @@ const TodoList = (props: TodoListPropsType) => {
   const setActive = () => props.changeFilter('active');
   const setCompleted = () => props.changeFilter('completed');
 
+  const allButtonClass = props.filter === 'all' ? 'active-filter' : '';
+  const activeButtonClass = props.filter === 'active' ? 'active-filter' : '';
+  const completedButtonClass = props.filter === 'completed' ? 'active-filter' : '';
+
   return (
     <div className="todolist">
       <h3>{props.title}</h3>
@@ -57,9 +64,16 @@ const TodoList = (props: TodoListPropsType) => {
         {tasksJSXElements}
       </ul>
       <div>
-        <button onClick={setAll}>All</button>
-        <button onClick={setActive}>Active</button>
-        <button onClick={setCompleted}>Completed</button>
+        <button
+          className={allButtonClass}
+          onClick={setAll}>All
+        </button>
+        <button
+          className={activeButtonClass}
+          onClick={setActive}>Active</button>
+        <button
+          className={completedButtonClass}
+          onClick={setCompleted}>Completed</button>
       </div>
     </div>
   );
