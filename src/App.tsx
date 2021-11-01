@@ -43,19 +43,11 @@ function App() {
   const removeTask = (taskId: string) => {
     setTasks(tasks.filter(task => task.id !== taskId));
   };
-
   const changeTaskStatus = (taskId: string, isDone: boolean) => {
-    // const updatedTasks = tasks.map(t => {
-    //   if (t.id === taskId) {
-    //     return {...t, isDone};
-    //   }
-    //   return t;
-    // });
     const updatedTasks = tasks
       .map(t => t.id === taskId ? {...t, isDone}: t)
     setTasks(updatedTasks);
   };
-
   const changeFilter = (filter: FilterValuesType) => {
     setFilter(filter);
   };

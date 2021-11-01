@@ -23,7 +23,9 @@ const TodoList = (props: TodoListPropsType) => {
     }
 
     return (
-      <li key={t.id}>
+      <li
+        key={t.id}
+        className={t.isDone ? 'is-done' : ''}>
         <input
           type="checkbox"
           checked={t.isDone}

@@ -16,3 +16,7 @@
 .active-filter {
   background-color: deepskyblue;
 }
+
+.is-done {
+  opacity: 0.5;
+}
