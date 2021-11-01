@@ -15,12 +15,13 @@ type TodoListPropsType = {
 const TodoList = (props: TodoListPropsType) => {
 
   const [title, setTitle] = useState<string>('');
+  const [error, setError] = useState<boolean>(false);
 
   const tasksJSXElements = props.tasks.map(t => {
     const onRemoveHandler = () => props.removeTask(t.id);
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-      props.changeTaskStatus(t.id, e.currentTarget.checked)
-    }
+      props.changeTaskStatus(t.id, e.currentTarget.checked);
+    };
 
     return (
       <li
@@ -37,12 +38,16 @@ const TodoList = (props: TodoListPropsType) => {
   });
 
   const addTask = () => {
-    if (title) {
-      props.addTask(title);
-      setTitle('');
+    const trimmedTitle = title.trim();
+    if (trimmedTitle) {
+      props.addTask(trimmedTitle);
+    } else {
+      setError(true);
     }
+    setTitle('');
   };
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setError(false);
     setTitle(e.currentTarget.value);
   };
   const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -63,6 +68,7 @@ const TodoList = (props: TodoListPropsType) => {
       <h3>{props.title}</h3>
       <div>
         <input
+          className={error ? 'error' : ''}
           placeholder="Add task..."
           value={title}
           onChange={onChangeHandler}
@@ -79,10 +85,12 @@ const TodoList = (props: TodoListPropsType) => {
         </button>
         <button
           className={activeButtonClass}
-          onClick={setActive}>Active</button>
+          onClick={setActive}>Active
+        </button>
         <button
           className={completedButtonClass}
-          onClick={setCompleted}>Completed</button>
+          onClick={setCompleted}>Completed
+        </button>
       </div>
     </div>
   );

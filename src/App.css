@@ -13,10 +13,19 @@
   padding: 20px;
 }
 
+.todolist button {
+  margin-right: 5px;
+}
+
 .active-filter {
   background-color: deepskyblue;
 }
 
 .is-done {
   opacity: 0.5;
+}
+
+.error {
+  border: 2px solid red;
+  outline: none;
 }
