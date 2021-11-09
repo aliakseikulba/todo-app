@@ -3,25 +3,47 @@ import './App.css';
 import TodoList from './TodoList';
 import {v1} from 'uuid'; //id generator
 
+
+export type FilterValuesType = 'all' | 'active' | 'completed'
 export type TaskType = {
   id: string
   title: string
   isDone: boolean
 }
-export type FilterValuesType = 'all' | 'active' | 'completed'
+export type TasksStateType = {
+  [key: string]: Array<TaskType>
+}
+export type TodoListType = {
+  id: string
+  title: string
+  filter: FilterValuesType
+}
+
 
 function App() {
 
-  //data to state
-  let tasksForState: Array<TaskType> = [
-    {id: v1(), title: 'HTML', isDone: true},
-    {id: v1(), title: 'CSS', isDone: true},
-    {id: v1(), title: 'React', isDone: false},
-    {id: v1(), title: 'Redux', isDone: false},
-  ];
+  const todoListID_1 = v1();
+  const todoListID_2 = v1();
+  const [todoList, setTodoList] = useState<Array<TodoListType>>([
+    {id: todoListID_1, title: 'What to learn', filter: 'all'},
+    {id: todoListID_2, title: 'What buy', filter: 'all'},
+  ])
 
-  //state
-  const [tasks, setTasks] = useState<Array<TaskType>>(tasksForState);
+  const [tasks, setTasks] = useState<TasksStateType>({
+    [todoListID_1]: [
+      {id: v1(), title: 'HTML', isDone: true},
+      {id: v1(), title: 'CSS', isDone: true},
+      {id: v1(), title: 'React', isDone: false},
+      {id: v1(), title: 'Redux', isDone: false},
+    ],
+    [todoListID_2]: [
+      {id: v1(), title: 'Bread', isDone: true},
+      {id: v1(), title: 'Milk', isDone: true},
+      {id: v1(), title: 'Jam', isDone: false},
+      {id: v1(), title: 'Butter', isDone: false},
+    ],
+  })
+
   const [filter, setFilter] = useState<FilterValuesType>('all');
 
   let tasksForRender = tasks;
