@@ -20,9 +20,9 @@ const TodoList = (props: TodoListPropsType) => {
   const [error, setError] = useState<boolean>(false);
 
   const tasksJSXElements = props.tasks.map(t => {
-    const onRemoveHandler = () => props.removeTask(t.id);
+    const onRemoveHandler = () => props.removeTask(t.id, props.id);
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-      props.changeTaskStatus(t.id, e.currentTarget.checked);
+      props.changeTaskStatus(t.id, e.currentTarget.checked, props.id);
     };
 
     return (
@@ -42,7 +42,7 @@ const TodoList = (props: TodoListPropsType) => {
   const addTask = () => {
     const trimmedTitle = title.trim();
     if (trimmedTitle) {
-      props.addTask(trimmedTitle);
+      props.addTask(trimmedTitle, props.id);
     } else {
       setError(true);
     }
@@ -57,9 +57,9 @@ const TodoList = (props: TodoListPropsType) => {
       addTask();
     }
   };
-  const setAll = () => props.changeFilter('all');
-  const setActive = () => props.changeFilter('active');
-  const setCompleted = () => props.changeFilter('completed');
+  const setAll = () => props.changeFilter('all', props.id);
+  const setActive = () => props.changeFilter('active', props.id);
+  const setCompleted = () => props.changeFilter('completed', props.id);
 
   const allButtonClass = props.filter === 'all' ? 'active-filter' : '';
   const activeButtonClass = props.filter === 'active' ? 'active-filter' : '';
