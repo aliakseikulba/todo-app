@@ -44,14 +44,6 @@ function App() {
     ],
   });
 
-  let tasksForRender = tasks;
-  if (filter === 'active') {
-    tasksForRender = tasks.filter(task => !task.isDone);
-  }
-  if (filter === 'completed') {
-    tasksForRender = tasks.filter(task => task.isDone);
-  }
-
   const addTAsk = (title: string, todoListID: string) => {
     const newTask: TaskType = {
       id: v1(),
@@ -85,17 +77,37 @@ function App() {
   };
 
 
-  return (
-    <div className="App">
+
+  ///UI
+  const todoListComponents = todoLists.map(tl => {
+
+    let tasksForRender: Array<TaskType> = tasks[tl.id];
+    if (tl.filter === 'active') {
+      tasksForRender = tasks[tl.id].filter(task => !task.isDone);
+    }
+    if (tl.filter === 'completed') {
+      tasksForRender = tasks[tl.id].filter(task => task.isDone);
+    }
+
+    return (
       <TodoList
-        filter={filter}
-        title="What to learn"
+        key={tl.id}
+        id={tl.id}
+        filter={tl.filter}
+        title={tl.title}
         tasks={tasksForRender}
         removeTask={removeTask}
         changeFilter={changeFilter}
         addTask={addTAsk}
         changeTaskStatus={changeTaskStatus}
+        removeTodoList={removeTodoList}
       />
+    )
+  })
+
+  return (
+    <div className="App">
+      {todoListComponents}
     </div>
   );
 }
