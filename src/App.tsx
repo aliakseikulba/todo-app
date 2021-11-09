@@ -76,6 +76,17 @@ function App() {
     delete tasks[todoListID];
   };
 
+  const addTodoList = (title: string) => {
+    const todoListID = v1();
+    const newTodoList: TodoListType = {
+      id: todoListID,
+      title,
+      filter: 'all'
+    }
+      setTodoLists([...todoLists, newTodoList])
+      setTasks({...tasks, [todoListID]: []})
+  }
+
 
 
   ///UI

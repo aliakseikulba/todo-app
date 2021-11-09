@@ -11,6 +11,7 @@
   border: 1px solid darkgrey;
   border-radius: 20px;
   padding: 20px;
+  height: 100%;
 }
 
 .todolist button {
