@@ -14,6 +14,8 @@ type TodoListPropsType = {
   addTask: (title: string, todoListID: string) => void
   changeTaskStatus: (taskId: string, isDone: boolean, todoListID: string) => void
   removeTodoList: (todoListID: string) => void
+  changeTaskTitle: (taskId: string, title: string, todoListID: string) => void
+  changeTodoListTitle: (title: string, todoListID: string) => void
 }
 
 const TodoList = (props: TodoListPropsType) => {
@@ -23,6 +25,9 @@ const TodoList = (props: TodoListPropsType) => {
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
       props.changeTaskStatus(t.id, e.currentTarget.checked, props.id);
     };
+    const changeTitle = (title: string) => {
+      props.changeTaskTitle(t.id, title, props.id)
+    }
 
     return (
       <li
@@ -32,7 +37,7 @@ const TodoList = (props: TodoListPropsType) => {
           type="checkbox"
           checked={t.isDone}
           onChange={onChangeHandler}/>
-        <EditableSpan title={t.title} />
+        <EditableSpan title={t.title} setNewTitle={changeTitle}/>
         <button onClick={onRemoveHandler}>X</button>
       </li>
     );
@@ -45,6 +50,7 @@ const TodoList = (props: TodoListPropsType) => {
   const setAll = () => props.changeFilter('all', props.id);
   const setActive = () => props.changeFilter('active', props.id);
   const setCompleted = () => props.changeFilter('completed', props.id);
+  const changeTodoListTitle = (title: string) => props.changeTodoListTitle(title, props.id);
 
   const allButtonClass = props.filter === 'all' ? 'active-filter' : '';
   const activeButtonClass = props.filter === 'active' ? 'active-filter' : '';
@@ -53,7 +59,7 @@ const TodoList = (props: TodoListPropsType) => {
   return (
     <div className="todolist">
       <h3>
-        {props.title}
+        <EditableSpan title={props.title} setNewTitle={changeTodoListTitle} />
         <button onClick={() => {props.removeTodoList(props.id)}}>X</button>
       </h3>
      <AddItemForm addItem={addTask}/>
