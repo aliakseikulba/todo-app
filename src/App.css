@@ -1,32 +1,40 @@
-.App {
-  padding: 30px;
-  display: flex;
-}
+/*.App {*/
+/*  padding: 30px;*/
+/*  display: flex;*/
+/*}*/
 
-.App > div {
-  margin-right: 50px;
-}
+/*.App > div {*/
+/*  margin-right: 50px;*/
+/*}*/
+
+/*.todolist {*/
+/*  border: 1px solid darkgrey;*/
+/*  border-radius: 20px;*/
+/*  padding: 20px;*/
+/*  height: 100%;*/
+/*}*/
 
 .todolist {
-  border: 1px solid darkgrey;
-  border-radius: 20px;
-  padding: 20px;
-  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-.todolist button {
-  margin-right: 5px;
+.tasks {
+  flex: 1 1 auto;
 }
+/*.todolist button {*/
+/*  margin-right: 5px;*/
+/*}*/
 
-.active-filter {
-  background-color: deepskyblue;
-}
+/*.active-filter {*/
+/*  background-color: deepskyblue;*/
+/*}*/
 
 .is-done {
   opacity: 0.5;
 }
 
-.error {
-  border: 2px solid red;
-  outline: none;
-}
+/*.error {*/
+/*  border: 2px solid red;*/
+/*  outline: none;*/
+/*}*/

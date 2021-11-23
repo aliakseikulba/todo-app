@@ -3,6 +3,8 @@ import './App.css';
 import TodoList from './TodoList';
 import {v1} from 'uuid';
 import {AddItemForm} from './AddItemForm';
+import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from '@material-ui/core';
+import {Menu} from '@material-ui/icons';
 
 
 export type FilterValuesType = 'all' | 'active' | 'completed'
@@ -113,27 +115,48 @@ function App() {
     }
 
     return (
-      <TodoList
-        key={tl.id}
-        id={tl.id}
-        filter={tl.filter}
-        title={tl.title}
-        tasks={tasksForRender}
-        removeTask={removeTask}
-        changeFilter={changeFilter}
-        addTask={addTAsk}
-        changeTaskStatus={changeTaskStatus}
-        removeTodoList={removeTodoList}
-        changeTaskTitle={changeTaskTitle}
-        changeTodoListTitle={changeTodoListTitle}
-      />
+      <Grid item
+            key={tl.id}>
+        <Paper elevation={8} style={{padding: "20px"}}>
+          <TodoList
+            id={tl.id}
+            filter={tl.filter}
+            title={tl.title}
+            tasks={tasksForRender}
+            removeTask={removeTask}
+            changeFilter={changeFilter}
+            addTask={addTAsk}
+            changeTaskStatus={changeTaskStatus}
+            removeTodoList={removeTodoList}
+            changeTaskTitle={changeTaskTitle}
+            changeTodoListTitle={changeTodoListTitle}
+          />
+        </Paper>
+      </Grid>
     )
   })
 
   return (
     <div className="App">
-       <AddItemForm addItem={addTodoList} />
-      {todoListComponents}
+      <AppBar position="static">
+        <Toolbar style={{justifyContent: "space-between"}}>
+          <IconButton edge="start" color="inherit" aria-label="menu">
+            <Menu/>
+          </IconButton>
+          <Typography variant="h6">
+            Todolists
+          </Typography>
+          <Button color="inherit" variant={"outlined"}>Login</Button>
+        </Toolbar>
+      </AppBar>
+      <Container fixed>
+        <Grid container style={{padding: "20px 0"}}>
+          <AddItemForm addItem={addTodoList} />
+        </Grid>
+        <Grid container spacing={6}>
+          {todoListComponents}
+        </Grid>
+      </Container>
     </div>
   );
 }

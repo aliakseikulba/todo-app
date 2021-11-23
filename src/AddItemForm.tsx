@@ -1,19 +1,16 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import {IconButton, TextField} from '@material-ui/core';
+import {AddCircleOutline} from '@material-ui/icons';
 
 type AddItemFormPropsType = {
-addItem: (title: string) => void
+  addItem: (title: string) => void
 }
 
 export const AddItemForm = (props: AddItemFormPropsType) => {
   const [title, setTitle] = useState<string>('');
   const [error, setError] = useState<boolean>(false);
 
-  const errorMessageStyle = {color: "red"};
-  const errorInputStyle = {border: "2px solid red", outline: "none"}
-
-  const errorMessage = error
-    ? <div style={errorMessageStyle}>Title is required</div>
-    : null;
+  const errorMessage = "Title is required";
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setError(false);
@@ -38,14 +35,21 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
 
   return (
     <div>
-      <input
-        style={error ? errorInputStyle : undefined}
-        placeholder="Add title..."
-        value={title}
-        onChange={onChangeHandler}
-        onKeyPress={onKeyPressHandler}/>
-      <button onClick={addItem}>+</button>
-      {errorMessage}
+      <TextField value={title}
+                 size="small"
+                 variant="outlined"
+                 onChange={onChangeHandler}
+                 onKeyPress={onKeyPressHandler}
+                 label='title'
+                 error={error}
+                 helperText={error && errorMessage}
+      />
+      <IconButton onClick={addItem}
+                  color="primary"
+                  size="small"
+      >
+        <AddCircleOutline fontSize={'large'}/>
+      </IconButton>
     </div>
   );
 };
