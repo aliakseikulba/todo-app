@@ -14,14 +14,6 @@
 /*  height: 100%;*/
 /*}*/
 
-.todolist {
-  display: flex;
-  flex-direction: column;
-}
-
-.tasks {
-  flex: 1 1 auto;
-}
 /*.todolist button {*/
 /*  margin-right: 5px;*/
 /*}*/
