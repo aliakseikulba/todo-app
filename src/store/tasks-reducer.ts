@@ -3,12 +3,12 @@ import {v1} from 'uuid';
 import {AddTodoListAT, RemoveTodoListAT} from './todolists-reducer';
 
 export type RemoveTaskAT = ReturnType<typeof removeTaskAC>;
-export type AddTask = ReturnType<typeof addTaskAC>;
+export type AddTaskAT = ReturnType<typeof addTaskAC>;
 export type ChangeTaskStatusAT = ReturnType<typeof changeTaskStatusAC>;
 export type ChangeTaskTitleAT = ReturnType<typeof changeTaskTitleAC>;
 
 export type ActionType = RemoveTaskAT
-  | AddTask
+  | AddTaskAT
   | ChangeTaskStatusAT
   | ChangeTaskTitleAT
   | AddTodoListAT
@@ -22,35 +22,30 @@ export const tasksReducer = (state: TasksStateType, action: ActionType): TasksSt
         ...state, [action.todolistID]: state[action.todolistID]
           .filter(t => t.id !== action.taskID)
       };
-
     case 'ADD-TASK': {
       return {
         ...state, [action.todoListID]: [
           {id: v1(), title: action.taskTitle, isDone: false}, ...state[action.todoListID]]
       };
     }
-
     case 'CHANGE-TASK-STATUS': {
       return {
         ...state, [action.todoListID]: state[action.todoListID].map(t =>
           t.id === action.taskID ? {...t, isDone: action.value} : t)
       };
     }
-
     case 'CHANGE-TASK-TITLE': {
       return {
         ...state, [action.todoListID]: state[action.todoListID].map(t =>
           t.id === action.taskID ? {...t, title: action.title} : t)
       };
     }
-
     case 'ADD-TODOLIST': {
       return {
         ...state,
         [action.todoListID]: []
       };
     }
-
     case 'REMOVE-TODOLIST': {
       let newState = {...state};
       delete newState[action.todoListID];
