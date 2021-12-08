@@ -3,8 +3,9 @@ import {v1} from 'uuid';
 
 export type RemoveTaskAT = ReturnType<typeof removeTaskAC>;
 export type AddTask = ReturnType<typeof addTaskAC>;
+export type ChangeTaskStatusAT = ReturnType<typeof changeTaskStatusAC>
 
-export type ActionType = RemoveTaskAT | AddTask
+export type ActionType = RemoveTaskAT | AddTask | ChangeTaskStatusAT
 
 export const tasksReducer = (state: TasksStateType, action: ActionType): TasksStateType => {
   switch (action.type) {
@@ -20,6 +21,11 @@ export const tasksReducer = (state: TasksStateType, action: ActionType): TasksSt
         ...state, [action.todoListID]: [
           {id: v1(), title: action.taskTitle, isDone: false}, ...state[action.todoListID]]
       };
+    }
+
+    case 'CHANGE-TASK-STATUS': {
+      return {...state, [action.todoListID]: state[action.todoListID].map(t =>
+        t.id === action.taskID ? {...t, isDone: action.value} : t)}
     }
 
     default:
@@ -42,3 +48,12 @@ export const addTaskAC = (taskTitle: string, todoListID: string) => {
     todoListID
   } as const;
 };
+
+export const changeTaskStatusAC = (taskID: string, value: boolean, todoListID: string) => {
+  return {
+    type: 'CHANGE-TASK-STATUS',
+    taskID,
+    value,
+    todoListID
+  } as const;
+}
