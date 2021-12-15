@@ -12,12 +12,12 @@ type TodoListPropsType = {
   title: string
   tasks: Array<TaskType>
   removeTask: (taskId: string, todoListID: string) => void
-  changeFilter: (filter: FilterValuesType, todoListID: string) => void
+  changeFilter: (todoListID: string, filter: FilterValuesType) => void
   addTask: (title: string, todoListID: string) => void
   changeTaskStatus: (taskId: string, isDone: boolean, todoListID: string) => void
   removeTodoList: (todoListID: string) => void
   changeTaskTitle: (taskId: string, title: string, todoListID: string) => void
-  changeTodoListTitle: (title: string, todoListID: string) => void
+  changeTodoListTitle: (todoListID: string, title: string) => void
 }
 
 const TodoList = (props: TodoListPropsType) => {
@@ -57,10 +57,10 @@ const TodoList = (props: TodoListPropsType) => {
     props.addTask(title, props.id);
   };
 
-  const setAll = () => props.changeFilter('all', props.id);
-  const setActive = () => props.changeFilter('active', props.id);
-  const setCompleted = () => props.changeFilter('completed', props.id);
-  const changeTodoListTitle = (title: string) => props.changeTodoListTitle(title, props.id);
+  const setAll = () => props.changeFilter(props.id, 'all');
+  const setActive = () => props.changeFilter(props.id, 'active');
+  const setCompleted = () => props.changeFilter(props.id, 'completed');
+  const changeTodoListTitle = (title: string) => props.changeTodoListTitle(props.id, title);
 
   const allButtonClass = props.filter === 'all' ? 'active-filter' : '';
   const activeButtonClass = props.filter === 'active' ? 'active-filter' : '';
