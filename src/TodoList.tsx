@@ -22,37 +22,6 @@ type TodoListPropsType = {
 
 const TodoList = (props: TodoListPropsType) => {
 
-  const tasksJSXElements = props.tasks.map(t => {
-    const onRemoveHandler = () => props.removeTask(t.id, props.id);
-    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-      props.changeTaskStatus(t.id, e.currentTarget.checked, props.id);
-    };
-    const changeTitle = (title: string) => {
-      props.changeTaskTitle(t.id, title, props.id);
-    };
-
-    return (
-      <ListItem
-        disableGutters
-        key={t.id}
-        className={t.isDone ? 'is-done' : ''}
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          padding: 0
-        }}>
-        <Checkbox onChange={onChangeHandler}
-                  checked={t.isDone}
-                  color="primary"/>
-        <EditableSpan title={t.title} setNewTitle={changeTitle}/>
-        <IconButton>
-          <DeleteOutline onClick={onRemoveHandler}
-                         fontSize="small"/>
-        </IconButton>
-      </ListItem>
-    );
-  });
-
   const addTask = (title: string) => {
     props.addTask(title, props.id);
   };
@@ -69,7 +38,7 @@ const TodoList = (props: TodoListPropsType) => {
   return (
     <div className="todolist">
       <Typography variant="h6"
-                  align='center'
+                  align="center"
                   style={{fontWeight: 600}}>
         <EditableSpan title={props.title} setNewTitle={changeTodoListTitle}/>
         <IconButton onClick={() => {
@@ -80,7 +49,38 @@ const TodoList = (props: TodoListPropsType) => {
       </Typography>
       <AddItemForm addItem={addTask}/>
       <List>
-        {tasksJSXElements}
+        {
+          props.tasks.map(t => {
+            const onRemoveHandler = () => props.removeTask(t.id, props.id);
+            const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+              props.changeTaskStatus(t.id, e.currentTarget.checked, props.id);
+            };
+            const changeTitle = (title: string) => {
+              props.changeTaskTitle(t.id, title, props.id);
+            };
+
+            return (
+              <ListItem
+                disableGutters
+                key={t.id}
+                className={t.isDone ? 'is-done' : ''}
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  padding: 0
+                }}>
+                <Checkbox onChange={onChangeHandler}
+                          checked={t.isDone}
+                          color="primary"/>
+                <EditableSpan title={t.title} setNewTitle={changeTitle}/>
+                <IconButton>
+                  <DeleteOutline onClick={onRemoveHandler}
+                                 fontSize="small"/>
+                </IconButton>
+              </ListItem>
+            );
+          })
+        }
       </List>
       <div>
         <ButtonGroup aria-label="small outlined button group" disableElevation>
