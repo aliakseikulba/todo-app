@@ -6,11 +6,12 @@ type AddItemFormPropsType = {
   addItem: (title: string) => void
 }
 
-export const AddItemForm = (props: AddItemFormPropsType) => {
+export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
+
   const [title, setTitle] = useState<string>('');
   const [error, setError] = useState<boolean>(false);
 
-  const errorMessage = "Title is required";
+  const errorMessage = 'Title is required';
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setError(false);
@@ -40,7 +41,7 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
                  variant="outlined"
                  onChange={onChangeHandler}
                  onKeyPress={onKeyPressHandler}
-                 label='title'
+                 label="title"
                  error={error}
                  helperText={error && errorMessage}
       />
@@ -52,5 +53,5 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
       </IconButton>
     </div>
   );
-};
+});
 
