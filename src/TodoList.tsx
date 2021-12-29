@@ -25,22 +25,22 @@ export const TodoList = React.memo((props: TodoListPropsType) => {
 
   const addTask = useCallback((title: string) => {
     props.addTask(title, props.id);
-  }, [props.addTask, props.id]);
+  }, [props]);
   const removeTask = useCallback((taskID: string) => {
     props.removeTask(taskID, props.id);
-  }, [props.removeTask, props.id]);
+  }, [props]);
   const changeTaskStatus = useCallback((taskID: string, newStatus: boolean) => {
     props.changeTaskStatus(taskID, newStatus, props.id);
-  }, [props.changeTaskStatus, props.id]);
+  }, [props]);
   const changeTaskTitle = useCallback((taskId: string, title: string) => {
     props.changeTaskTitle(taskId, title, props.id);
-  }, [props.changeTaskTitle, props.id]);
+  }, [props]);
 
   const setAll = useCallback(() => props.changeFilter(props.id, 'all'), [props]);
   const setActive = useCallback(() => props.changeFilter(props.id, 'active'), [props]);
   const setCompleted = useCallback(() => props.changeFilter(props.id, 'completed'), [props]);
   const changeTodoListTitle = useCallback( (title: string) => props.changeTodoListTitle(props.id, title),
-    [props.changeTodoListTitle, props.id]);
+    [props]);
 
   const allButtonClass = props.filter === 'all' ? 'active-filter' : '';
   const activeButtonClass = props.filter === 'active' ? 'active-filter' : '';
