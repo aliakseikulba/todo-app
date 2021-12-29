@@ -1,10 +1,10 @@
 import React, {ChangeEvent, useCallback} from 'react';
 import {Checkbox, IconButton, ListItem} from '@material-ui/core';
-import {EditableSpan} from '../EditableSpan';
+import {EditableSpan} from './EditableSpan';
 import {DeleteOutline} from '@material-ui/icons';
-import {TaskType} from '../App';
+import {TaskType} from './App';
 
-type TaskPropsType = {
+export type TaskPropsType = {
   task: TaskType
   removeTask: (taskId: string) => void
   changeTaskStatus: (taskId: string, isDone: boolean) => void

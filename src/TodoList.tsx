@@ -4,7 +4,7 @@ import {AddItemForm} from './AddItemForm';
 import {EditableSpan} from './EditableSpan';
 import {Button, ButtonGroup, IconButton, List, Typography} from '@material-ui/core';
 import {Delete} from '@material-ui/icons';
-import {Task} from './state/Task';
+import {Task} from './Task';
 
 
 type TodoListPropsType = {
