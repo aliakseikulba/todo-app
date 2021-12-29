@@ -82,7 +82,6 @@ function App() {
   const removeTodoList = useCallback((todoListID: string) => {
     const action = removeTodoListAC(todoListID);
     dispatch(action);
-    dispatch(action);
   }, [dispatch]);
   const addTodoList = useCallback(
     (title: string) => {
