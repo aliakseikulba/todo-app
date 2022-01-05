@@ -1,6 +1,6 @@
 import React from 'react';
-import {ComponentMeta, Story} from '@storybook/react';
-import {Task, TaskPropsType} from '../Task';
+import {ComponentMeta, ComponentStory} from '@storybook/react';
+import {Task} from '../Task';
 import {action} from '@storybook/addon-actions';
 
 export default {
@@ -12,7 +12,7 @@ const removeTaskCallback = action('Remove button inside Task');
 const changeTaskStatusCallback = action('Status changed inside Task');
 const changeTaskTitleCallback = action('Title changed inside Task');
 
-const Template: Story<TaskPropsType> = (args) => <Task {...args} />;
+const Template: ComponentStory<typeof Task> = (args) => <Task {...args} />;
 
 const baseArgs = {
   removeTask: removeTaskCallback,
